@@ -27,18 +27,22 @@ class ViewController: UIViewController {
             
             if digit == "." && display.text!.rangeOfString(".") == nil {
                 display.text = display.text! + "."
+                secondDisplay.text = secondDisplay.text! + "."
+
             } else if digit == "π" {
                 return
-            } else {
+            } else if digit != "." {
                 display.text = display.text! + digit
+                secondDisplay.text = secondDisplay.text! + digit
+
             }
             
         } else {
             
             display.text = digit
+            secondDisplay.text = secondDisplay.text! + digit
             userIsInTheMiddleOfTypingANumber = true
         }
-        secondDisplay.text = secondDisplay.text! + digit
         
     }
     
