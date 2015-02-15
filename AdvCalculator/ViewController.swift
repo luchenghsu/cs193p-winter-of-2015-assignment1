@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         case "√": performOperation { sqrt($0) }
         case "sin": performOperation { sin($0)}
         case "cos": performOperation { cos($0) }
-        case "π": performOperation()
+        case "π": performOperation { M_PI }
             
         default: break
             
@@ -107,8 +107,8 @@ class ViewController: UIViewController {
         }
     }
     
-    func performOperation() {
-        displayValue = M_PI
+    func performOperation(operation: () -> Double) {
+        displayValue = operation()
         enter()
     }
     
