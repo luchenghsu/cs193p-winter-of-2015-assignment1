@@ -25,22 +25,22 @@ class ViewController: UIViewController {
         
         if userIsInTheMiddleOfTypingANumber {
             
-            if digit == "." && display.text!.rangeOfString(".") == nil {
-                display.text = display.text! + "."
-                secondDisplay.text = secondDisplay.text! + "."
-
-            } else if digit == "π" {
+            if digit == "." && display.text!.rangeOfString(".") != nil {
                 return
+                
             } else if digit != "." {
                 display.text = display.text! + digit
-                secondDisplay.text = secondDisplay.text! + digit
-
             }
             
         } else {
             
-            display.text = digit
-            secondDisplay.text = secondDisplay.text! + digit
+            if digit == "." {
+                display.text = "0."
+                
+            } else {
+                display.text = digit
+                
+            }
             userIsInTheMiddleOfTypingANumber = true
         }
         
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         userIsInTheMiddleOfTypingANumber = false
         operandStack.removeAll(keepCapacity: false)
         display.text = "0"
-        
+        secondDisplay.text = ""
     }
     
     @IBAction func operate(sender: UIButton) {
@@ -70,6 +70,7 @@ class ViewController: UIViewController {
         case "√": performOperation { sqrt($0) }
         case "sin": performOperation { sin($0)}
         case "cos": performOperation { cos($0) }
+        case "π": performOperation()
             
         default: break
             
@@ -93,19 +94,23 @@ class ViewController: UIViewController {
         }
     }
     
+    func performOperation() {
+        displayValue = M_PI
+        enter()
+    }
+    
     // var operandStack: Array<Double> = Array<Double>()
     var operandStack = Array<Double>()
 
     @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
         operandStack.append(displayValue)
+        secondDisplay.text = secondDisplay.text! + "\(displayValue)"
     }
     
     var displayValue: Double {
         get {
-      
-           if display.text == "π" { return M_PI }
-            
+    
            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
         }
         
