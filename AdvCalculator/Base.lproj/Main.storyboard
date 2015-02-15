@@ -388,7 +388,7 @@
                     </view>
                     <connections>
                         <outlet property="display" destination="7Uo-PD-QcR" id="fw3-6b-hJt"/>
-                        <outlet property="secondDisplay" destination="muX-BC-4hK" id="UqV-Ug-buT"/>
+                        <outlet property="history" destination="muX-BC-4hK" id="Vdy-Ij-rIZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

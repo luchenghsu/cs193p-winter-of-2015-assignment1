@@ -13,8 +13,9 @@ class ViewController: UIViewController {
 
    
     @IBOutlet weak var display: UILabel!
-    @IBOutlet weak var secondDisplay: UILabel!
+    @IBOutlet weak var history: UILabel!
     //var userIsInTheMiddleOfTypingANumber: Bool = false
+    
     var userIsInTheMiddleOfTypingANumber = false
 
 
@@ -22,7 +23,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        secondDisplay.text = ""
+        history.text = ""
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,7 +63,7 @@ class ViewController: UIViewController {
         userIsInTheMiddleOfTypingANumber = false
         operandStack.removeAll(keepCapacity: false)
         display.text = "0"
-        secondDisplay.text = ""
+        history.text = ""
     }
     
     @IBAction func operate(sender: UIButton) {
@@ -72,7 +73,7 @@ class ViewController: UIViewController {
             enter()
         }
         
-        secondDisplay.text = secondDisplay.text! + operation
+        history.text = history.text! + operation
         
         switch operation {
         case "×": performOperation { $0 * $1 }
@@ -117,7 +118,7 @@ class ViewController: UIViewController {
     @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
         operandStack.append(displayValue)
-        secondDisplay.text = secondDisplay.text! + "\(displayValue)"
+        history.text = history.text! + "\(displayValue)"
     }
     
     var displayValue: Double {
