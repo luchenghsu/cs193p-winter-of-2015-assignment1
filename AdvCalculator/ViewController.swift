@@ -60,6 +60,20 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func backSpace(sender: UIButton) {
+        if userIsInTheMiddleOfTypingANumber {
+            var s = display.text!
+            s = dropLast(s)
+            
+            if countElements(s) == 0 {
+                display.text = "0"
+                userIsInTheMiddleOfTypingANumber = false
+            } else {
+                display.text = s
+            }
+        }
+    }
+    
     @IBAction func clear(sender: UIButton) {
         userIsInTheMiddleOfTypingANumber = false
         brain.clear()
