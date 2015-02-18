@@ -42,7 +42,7 @@ class ViewController: UIViewController {
             if digit == "." && display.text!.rangeOfString(".") != nil {
                 return
                 
-            } else if digit != "." {
+            } else {
                 display.text = display.text! + digit
             }
             
@@ -93,18 +93,21 @@ class ViewController: UIViewController {
             } else {
                 displayValue = nil
             }
-            history.text = history.text! + "\(displayValue)"
+            history.text = history.text! + "\(displayValue!)"
         }
     }
     
     var displayValue: Double? {
         get {
-    
-           return NSNumberFormatter().numberFromString(display.text!)?.doubleValue
+            return NSNumberFormatter().numberFromString(display.text!)?.doubleValue
         }
         
         set {
-            display.text = "\(newValue)"
+            if newValue != nil {
+                display.text = "\(newValue!)"
+            } else {
+                display.text = ""
+            }
             userIsInTheMiddleOfTypingANumber = false
         }
         
