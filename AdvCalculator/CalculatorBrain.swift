@@ -12,9 +12,11 @@ class CalculatorBrain {
     
     private var opStack = [Op]()
     private var knownOps = [String:Op]()
+    var variableValues = [String:Double]()
     
     private enum Op: Printable {
         case Operand(Double)
+        case Variable(String)
         case BinaryOperation(String, (Double, Double) -> Double)
         case UnaryOperation(String, Double -> Double)
         case ConstantOperation(String, () -> Double)
@@ -24,6 +26,8 @@ class CalculatorBrain {
                 switch self {
                 case .Operand(let operand):
                     return "\(operand)"
+                case .Variable(let symbol):
+                    return "\(symbol)"
                 case .UnaryOperation(let symbol, _):
                     return symbol
                 case .BinaryOperation(let symbol, _):
@@ -62,6 +66,9 @@ class CalculatorBrain {
             case .Operand(let operand):
                 return (operand, remainingOps)
                 
+            case .Variable(let symbol):
+                return (variableValues[symbol], remainingOps)
+                
             case .ConstantOperation(_, let operation):
                 return (operation(), remainingOps)
     
@@ -92,13 +99,17 @@ class CalculatorBrain {
         return result
     }
     
-    func pushOperand(operand: Double)-> Double? {
+    func pushOperand(operand: Double) -> Double? {
         opStack.append(Op.Operand(operand))
         return evaluate()
     }
     
+    func pushOperand(symbol: String) -> Double? {
+        opStack.append(Op.Variable(symbol))
+        return evaluate()
+    }
+    
     func performOperation(symbol: String) -> Double? {
-        println("symbol=\(symbol)")
         if let operation = knownOps[symbol] {
             opStack.append(operation)
         }
