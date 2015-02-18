@@ -41,9 +41,20 @@ class ViewController: UIViewController {
             
             if digit == "." && display.text!.rangeOfString(".") != nil {
                 return
-                
+            } else if digit == "±" {
+                if display.text!.rangeOfString("-") != nil {
+                    display.text = dropFirst(display.text!)
+                } else {
+                    display.text = "-" + display.text!
+                }
             } else {
-                display.text = display.text! + digit
+                if display.text! == "0" {
+                    display.text = digit
+                } else if display.text == "-0" {
+                    display.text = "-"+digit
+                } else {
+                    display.text = display.text! + digit
+                }
             }
             
         } else {
@@ -51,9 +62,15 @@ class ViewController: UIViewController {
             if digit == "." {
                 display.text = "0."
                 
+            } else if digit == "±" {
+                if display.text!.rangeOfString("-") != nil {
+                    display.text = dropFirst(display.text!)
+                } else {
+                    display.text = "-" + display.text!
+                }
             } else {
+                if digit == "0" && display.text! == "0" { return }
                 display.text = digit
-                
             }
             userIsInTheMiddleOfTypingANumber = true
         }
@@ -93,9 +110,7 @@ class ViewController: UIViewController {
             } else {
                 displayValue = nil
             }
-            
         }
-        
     }
     
     @IBAction func enter() {
