@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        history.text = ""
+        history.text = " "
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         userIsInTheMiddleOfTypingANumber = false
         brain.clear()
         display.text = "0"
-        history.text = ""
+        history.text = " "
     }
     
     @IBAction func operate(sender: UIButton) {
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
             if newValue != nil {
                 display.text = "\(newValue!)"
             } else {
-                display.text = ""
+                display.text = " "
             }
             userIsInTheMiddleOfTypingANumber = false
         }
