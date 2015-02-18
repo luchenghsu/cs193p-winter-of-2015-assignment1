@@ -63,7 +63,6 @@ class CalculatorBrain {
                 return (operand, remainingOps)
                 
             case .ConstantOperation(_, let operation):
-                
                 return (operation(), remainingOps)
     
             case .UnaryOperation(_, let operation):
@@ -101,7 +100,6 @@ class CalculatorBrain {
     func performOperation(symbol: String) -> Double? {
         println("symbol=\(symbol)")
         if let operation = knownOps[symbol] {
-            println("perform Operation inside if let operation=")
             opStack.append(operation)
         }
         return evaluate()
