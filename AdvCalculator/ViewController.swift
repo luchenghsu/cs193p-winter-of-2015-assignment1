@@ -77,7 +77,7 @@ class ViewController: UIViewController {
             if let result = brain.performOperation(operation) {
                 displayValue = result
             } else {
-                displayValue = 0
+                displayValue = nil
             }
             
         }
@@ -91,7 +91,7 @@ class ViewController: UIViewController {
             if let result = brain.pushOperand(displayValue!) {
                 displayValue = result
             } else {
-                displayValue = 0
+                displayValue = nil
             }
             history.text = history.text! + "\(displayValue)"
         }
