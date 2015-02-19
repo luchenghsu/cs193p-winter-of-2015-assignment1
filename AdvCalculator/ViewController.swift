@@ -104,7 +104,7 @@ class ViewController: UIViewController {
         }
         
         if let operation = sender.currentTitle {
-            history.text = history.text! + operation
+            history.text = history.text! + operation + "="
             if let result = brain.performOperation(operation) {
                 displayValue = result
             } else {
