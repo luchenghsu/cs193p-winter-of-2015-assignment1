@@ -74,7 +74,7 @@ class ViewController: UIViewController {
             }
             userIsInTheMiddleOfTypingANumber = true
         }
-        
+        history.text = display.text!
     }
     
     @IBAction func backSpace(sender: UIButton) {
@@ -104,7 +104,7 @@ class ViewController: UIViewController {
         }
         
         if let operation = sender.currentTitle {
-            history.text = history.text! + operation + "="
+           
             if let result = brain.performOperation(operation) {
                 displayValue = result
             } else {
@@ -122,7 +122,6 @@ class ViewController: UIViewController {
             } else {
                 displayValue = nil
             }
-            history.text = history.text! + "\(displayValue!)"
         }
     }
     
@@ -138,6 +137,7 @@ class ViewController: UIViewController {
                 display.text = " "
             }
             userIsInTheMiddleOfTypingANumber = false
+            history.text = "\(brain) ="
         }
         
     }

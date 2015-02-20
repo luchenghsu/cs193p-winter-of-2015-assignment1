@@ -8,11 +8,67 @@
 
 import Foundation
 
-class CalculatorBrain {
+class CalculatorBrain: Printable {
     
     private var opStack = [Op]()
     private var knownOps = [String:Op]()
     var variableValues = [String:Double]()
+    
+    var description: String {
+        get {
+            
+            var (result, ops) = ("", opStack)
+            while ops.count > 0 {
+                var current: String?
+                (current, ops) = description(ops)
+                if result == "" {
+                    result = current!
+                } else {
+                    result = current! + ", " + result
+                }
+            }
+            return result
+        }
+    }
+    
+    private func description(ops: [Op]) -> (result: String?, remainingOps: [Op]) {
+        if !ops.isEmpty {
+            var remainingOps = ops
+            let op = remainingOps.removeLast()
+            
+            switch op {
+                
+            case .Operand(let operand):
+                return ("\(operand)", remainingOps)
+                
+            case .Variable(let symbol):
+                return (symbol, remainingOps)
+                
+            case .ConstantOperation(let symbol, _):
+                return (symbol, remainingOps)
+                
+            case .UnaryOperation(let symbol, _):
+                let operandEvaluation = description(remainingOps)
+                if let operand = operandEvaluation.result {
+                    return ("\(symbol)(\(operand))", operandEvaluation.remainingOps)
+                }
+                
+            case .BinaryOperation(let symbol, _):
+                
+                let op1Evaluation = description(remainingOps)
+                if let operand1 = op1Evaluation.result {
+                    let op2Evaluation = description(op1Evaluation.remainingOps)
+                    if let operand2 = op2Evaluation.result {
+                        if op2Evaluation.remainingOps.isEmpty {
+                             return ("\(operand2) \(symbol) \(operand1)", op2Evaluation.remainingOps)
+                        }
+                        return ("(\(operand2) \(symbol) \(operand1))", op2Evaluation.remainingOps)
+                    }
+                }
+            }
+        }
+        return ("?", ops)
+    }
     
     private enum Op: Printable {
         case Operand(Double)
@@ -27,7 +83,7 @@ class CalculatorBrain {
                 case .Operand(let operand):
                     return "\(operand)"
                 case .Variable(let symbol):
-                    return "\(symbol)"
+                    return symbol
                 case .UnaryOperation(let symbol, _):
                     return symbol
                 case .BinaryOperation(let symbol, _):
@@ -93,9 +149,9 @@ class CalculatorBrain {
         return (nil, ops)
     }
     
-    func evaluate() -> Double? {
+    private func evaluate() -> Double? {
         let (result, remainder) = evaluate(opStack)
-        println("\(opStack) = \(result) with \(remainder) left over")
+        //println("\(opStack) = \(result) with \(remainder) left over")
         return result
     }
     
