@@ -179,6 +179,7 @@ class CalculatorBrain: Printable {
     
     func clear() {
         opStack.removeAll(keepCapacity: false)
+        variableValues.removeAll(keepCapacity: false)
     }
     
 }
