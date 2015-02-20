@@ -60,9 +60,9 @@ class CalculatorBrain: Printable {
                     let op2Evaluation = description(op1Evaluation.remainingOps)
                     if let operand2 = op2Evaluation.result {
                         if op2Evaluation.remainingOps.isEmpty {
-                             return ("\(operand2) \(symbol) \(operand1)", op2Evaluation.remainingOps)
+                             return ("\(operand2)\(symbol)\(operand1)", op2Evaluation.remainingOps)
                         }
-                        return ("(\(operand2) \(symbol) \(operand1))", op2Evaluation.remainingOps)
+                        return ("(\(operand2)\(symbol)\(operand1))", op2Evaluation.remainingOps)
                     }
                 }
             }

@@ -74,7 +74,6 @@ class ViewController: UIViewController {
             }
             userIsInTheMiddleOfTypingANumber = true
         }
-        history.text = display.text!
     }
     
     @IBAction func backSpace(sender: UIButton) {
