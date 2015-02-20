@@ -113,6 +113,35 @@ class ViewController: UIViewController {
         }
     }
     
+    private var variable = ""
+    @IBAction func variable(sender: UIButton) {
+        if userIsInTheMiddleOfTypingANumber {
+            enter()
+        }
+       
+        variable = sender.currentTitle!
+        
+        if let result = brain.pushOperand(variable) {
+            displayValue = result
+        } else {
+            displayValue = nil
+        }
+    }
+    
+    @IBAction func pushVariableValue(sender: UIButton) {
+        userIsInTheMiddleOfTypingANumber = false
+
+        if displayValue != nil {
+
+            if let result = brain.performOperation(variable, value: displayValue!) {
+                displayValue = result
+            } else {
+                displayValue = nil
+            }
+        }
+    }
+    
+    
     @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
         if displayValue != nil {

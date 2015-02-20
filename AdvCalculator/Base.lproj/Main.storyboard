@@ -153,6 +153,9 @@
                                 <state key="normal" title="→M">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pushVariableValue:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ebG-dh-94G"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mww-lm-dck">
                                 <rect key="frame" x="472" y="507" width="104" height="85"/>
@@ -160,6 +163,9 @@
                                 <state key="normal" title="M">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="variable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fjh-9y-o83"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyY-st-DOC">
                                 <rect key="frame" x="136" y="226" width="104" height="86"/>

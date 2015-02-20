@@ -165,6 +165,11 @@ class CalculatorBrain: Printable {
         return evaluate()
     }
     
+    func performOperation(symbol: String, value: Double) -> Double? {
+        variableValues[symbol] = value
+        return evaluate()
+    }
+    
     func performOperation(symbol: String) -> Double? {
         if let operation = knownOps[symbol] {
             opStack.append(operation)
